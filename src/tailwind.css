@@ -9,3 +9,22 @@ Version: 0.1
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .scrollbar-hidden {
+    -ms-overflow-style: none; /* hide scrollbar in IE/Edge */
+    scrollbar-width: none; /* hide scrollbar in Firefox */
+    scrollbar-color: transparent transparent;
+    overscroll-behavior-inline: contain;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar-track,
+  .scrollbar-hidden::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
