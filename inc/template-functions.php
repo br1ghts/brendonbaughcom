@@ -155,6 +155,32 @@ function brendon_core_get_sidebar_social_links() {
 }
 
 /**
+ * Provides default fallback pages for the sidebar when no menu is set.
+ *
+ * @return array
+ */
+function brendon_core_sidebar_fallback_pages() {
+	return [
+		[
+			'label' => esc_html__( 'Home', 'brendon-core' ),
+			'url'   => home_url( '/' ),
+		],
+		[
+			'label' => esc_html__( 'Writing', 'brendon-core' ),
+			'url'   => home_url( '/writing' ),
+		],
+		[
+			'label' => esc_html__( 'Work', 'brendon-core' ),
+			'url'   => home_url( '/work' ),
+		],
+		[
+			'label' => esc_html__( 'About', 'brendon-core' ),
+			'url'   => home_url( '/about' ),
+		],
+	];
+}
+
+/**
  * Returns SVG markup for a social icon.
  *
  * @param string $icon
@@ -215,12 +241,10 @@ function brendon_core_get_social_icon_svg( $icon, $classes = 'h-4 w-4' ) {
  * @return string
  */
 function brendon_core_sidebar_menu_base_classes( $is_active = false ) {
-	$classes = 'flex w-full items-center rounded-lg border border-[#F2A25C]/30 px-3 py-2 text-sm font-medium text-slate-700 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 hover:bg-[#F2EB8D]/40 hover:text-slate-900';
+	$classes = 'flex w-full items-center rounded-lg border border-[#F2A25C]/30 px-3 py-2 text-sm font-medium text-slate-700 bg-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 hover:bg-[#F2EB8D]/40 hover:text-slate-900 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-800 dark:hover:bg-[#F2EB8D]/40 dark:hover:text-slate-900';
 
 	if ( $is_active ) {
-		$classes .= ' bg-[#F2A25C]/25 border-l-4 border-[#F24E29] font-semibold text-slate-900';
-	} else {
-		$classes .= ' bg-white';
+		$classes .= ' bg-[#F2A25C]/25 border-l-4 border-[#F24E29] font-semibold text-slate-900 dark:text-slate-100 dark:border-l-4 dark:border-[#F24E29]';
 	}
 
 	return $classes;

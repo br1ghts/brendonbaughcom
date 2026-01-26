@@ -24,7 +24,7 @@ if (! function_exists('brendon_core_comment')) {
 		$commenter = get_comment_author_link($comment);
 		$avatar = get_avatar($comment, 48, '', '', ['class' => 'h-12 w-12 rounded-full']);
 
-		echo '<li id="comment-' . esc_attr($comment->comment_ID) . '" class="comment rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition hover:border-[#F2A25C]/60 focus-within:border-[#F2A25C]/60">';
+			echo '<li id="comment-' . esc_attr($comment->comment_ID) . '" class="comment rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition hover:border-[#F2A25C]/60 focus-within:border-[#F2A25C]/60 dark:bg-slate-900 dark:border-[#F2A25C]/20 dark:text-slate-100">';
 		echo '<div class="flex gap-4">';
 		echo '<div class="flex-shrink-0">' . $avatar . '</div>';
 		echo '<div class="flex-1">';
@@ -32,11 +32,11 @@ if (! function_exists('brendon_core_comment')) {
 		printf('<span class="text-sm font-semibold text-slate-900">%s</span>', $commenter);
 		printf('<time class="text-xs uppercase tracking-wider text-slate-500" datetime="%s">%s</time>', esc_attr(get_comment_date('c', $comment)), esc_html(get_comment_date('', $comment)));
 		echo '</div>';
-		echo '<div class="mt-3 text-sm leading-relaxed text-slate-700">';
+			echo '<div class="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-200">';
 		comment_text();
 		echo '</div>';
 		echo '<div class="mt-4 flex flex-wrap gap-3 text-xs">';
-		$comment_action_classes = 'inline-flex items-center rounded-full border border-[#F2A25C]/40 bg-white px-3 py-1 text-xs font-semibold text-[#F26D3D] shadow-sm transition hover:border-[#F2A25C]/60 hover:bg-[#F2EB8D]/60 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70';
+		$comment_action_classes = 'inline-flex items-center rounded-full border border-[#F2A25C]/40 bg-white px-3 py-1 text-xs font-semibold text-[#F26D3D] shadow-sm transition hover:border-[#F2A25C]/60 hover:bg-[#F2EB8D]/60 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-[#F2EB8D]/40';
 		comment_reply_link(array_merge($args, [
 			'reply_text' => esc_html__('Reply', 'brendon-core'),
 			'depth' => $depth,
@@ -94,7 +94,7 @@ if (! function_exists('brendon_core_comment')) {
 	<?php
 	$commenter = wp_get_current_commenter();
 
-	$shared_field_classes = 'w-full rounded-lg border border-[#F2A25C]/30 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#F2A25C] focus:ring-2 focus:ring-[#F2A25C]/40';
+	$shared_field_classes = 'w-full rounded-lg border border-[#F2A25C]/30 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#F2A25C] focus:ring-2 focus:ring-[#F2A25C]/40 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700 dark:placeholder:text-slate-500';
 
 	$comment_form_args = [
 		'class_form' => 'space-y-4',
@@ -111,7 +111,7 @@ if (! function_exists('brendon_core_comment')) {
 	];
 	?>
 
-	<div class="rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm">
+	<div class="rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm dark:bg-slate-900 dark:border-[#F2A25C]/20">
 		<?php comment_form($comment_form_args); ?>
 	</div>
 

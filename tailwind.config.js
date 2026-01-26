@@ -2,6 +2,7 @@
 const typography = require('@tailwindcss/typography');
 
 module.exports = {
+  darkMode: 'class',
   content: [
     "./**/*.php",
     "./template-parts/**/*.php",
@@ -70,6 +71,46 @@ module.exports = {
               opacity: '0.45',
               marginTop: theme('spacing.10'),
               marginBottom: theme('spacing.10'),
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.slate.200'),
+            strong: {
+              color: theme('colors.slate.100'),
+            },
+            a: {
+              color: '#F26D3D',
+              fontWeight: '600',
+              transition: 'color 0.2s ease',
+              '&:hover': {
+                color: '#F24E29',
+              },
+            },
+            h1: {
+              color: theme('colors.slate.100'),
+            },
+            h2: {
+              color: theme('colors.slate.100'),
+              borderBottomColor: theme('colors.slate.800'),
+            },
+            h3: {
+              color: theme('colors.slate.100'),
+            },
+            p: {
+              color: theme('colors.slate.200'),
+            },
+            blockquote: {
+              backgroundColor: 'rgba(242,235,141,0.1)',
+            },
+            code: {
+              backgroundColor: 'rgba(0,0,0,0.35)',
+              color: theme('colors.slate.100'),
+            },
+            hr: {
+              borderColor: theme('colors.slate.800'),
+              opacity: '0.35',
             },
           },
         },

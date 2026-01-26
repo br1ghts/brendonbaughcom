@@ -11,12 +11,15 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main min-h-screen bg-[#F2F2F2]">
+<main id="primary" class="site-main min-h-screen bg-[#F2F2F2] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
 	<div class="w-full px-6 py-8">
+		<div class="mb-6 lg:hidden">
+			<?php get_template_part('template-parts/mobile-sidebar-panel'); ?>
+		</div>
 
 		<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 
-			<aside class="lg:col-span-3 lg:sticky lg:top-8 self-start">
+			<aside class="hidden lg:block lg:col-span-3 lg:sticky lg:top-8 self-start">
 				<?php get_template_part('template-parts/sidebar-panel'); ?>
 			</aside>
 

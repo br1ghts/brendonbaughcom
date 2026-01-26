@@ -42,16 +42,19 @@ if ( 'post' === get_post_type() ) {
 	);
 }
 
-$card_classes = 'group relative overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-[1px] hover:border-[#F2A25C]/60 hover:shadow-lg focus-within:-translate-y-[1px] focus-within:border-[#F2A25C]/60 focus-within:shadow-lg';
+	$card_classes = 'group relative overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-[1px] hover:border-[#F2A25C]/60 hover:shadow-lg focus-within:-translate-y-[1px] focus-within:border-[#F2A25C]/60 focus-within:shadow-lg dark:bg-slate-900 dark:border-[#F2A25C]/20 dark:text-slate-100';
 
 if ( is_singular() ) :
 	?>
 
-	<main id="primary" class="site-main min-h-screen bg-[#F2F2F2]">
+	<main id="primary" class="site-main min-h-screen bg-[#F2F2F2] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
 		<div class="w-full px-6 py-8">
+			<div class="mb-6 lg:hidden">
+				<?php get_template_part( 'template-parts/mobile-sidebar-panel' ); ?>
+			</div>
 			<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 
-				<aside class="lg:col-span-3 lg:sticky lg:top-8 self-start">
+				<aside class="hidden lg:block lg:col-span-3 lg:sticky lg:top-8 self-start">
 					<?php get_template_part( 'template-parts/sidebar-panel' ); ?>
 				</aside>
 
@@ -78,12 +81,12 @@ if ( is_singular() ) :
 									</div>
 								<?php endif; ?>
 
-								<h1 class="text-3xl font-semibold tracking-tight leading-tight text-slate-900 transition-colors duration-200">
+								<h1 class="text-3xl font-semibold tracking-tight leading-tight text-slate-900 transition-colors duration-200 dark:text-slate-100">
 									<?php echo esc_html( $title ); ?>
 								</h1>
 
 								<?php if ( 'post' === get_post_type() ) : ?>
-									<div class="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+									<div class="flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
 										<span><?php echo esc_html( $date ); ?></span>
 										<span class="text-slate-300">•</span>
 										<span><?php echo esc_html( $author ); ?></span>
@@ -95,7 +98,7 @@ if ( is_singular() ) :
 								<?php endif; ?>
 							</header>
 
-							<div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29]">
+							<div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] dark:text-slate-200 dark:prose-dark">
 								<?php
 								the_content();
 								wp_link_pages(
@@ -108,7 +111,7 @@ if ( is_singular() ) :
 							</div>
 
 							<?php if ( 'post' === get_post_type() ) : ?>
-								<footer class="pt-2 text-sm text-slate-600">
+								<footer class="pt-2 text-sm text-slate-600 dark:text-slate-300">
 									<?php the_tags( 'Tags: ', ', ', '' ); ?>
 								</footer>
 							<?php endif; ?>
@@ -151,14 +154,14 @@ if ( is_singular() ) :
 					</div>
 				<?php endif; ?>
 
-				<h2 class="text-2xl font-semibold tracking-tight leading-tight">
-					<a class="text-slate-900 transition-colors duration-200 hover:text-[#F26D3D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70" href="<?php echo esc_url( $permalink ); ?>" rel="bookmark">
+					<h2 class="text-2xl font-semibold tracking-tight leading-tight">
+						<a class="text-slate-900 transition-colors duration-200 hover:text-[#F26D3D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 dark:text-slate-100" href="<?php echo esc_url( $permalink ); ?>" rel="bookmark">
 						<?php echo esc_html( $title ); ?>
 					</a>
 				</h2>
 
 				<?php if ( 'post' === get_post_type() ) : ?>
-					<div class="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+					<div class="flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
 						<span><?php echo esc_html( $date ); ?></span>
 						<span class="text-slate-300">•</span>
 						<span><?php echo esc_html( $author ); ?></span>
@@ -170,7 +173,7 @@ if ( is_singular() ) :
 				<?php endif; ?>
 			</header>
 
-			<div class="prose prose-lg prose-slate max-w-none text-slate-700 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29]">
+			<div class="prose prose-lg prose-slate max-w-none text-slate-700 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] dark:text-slate-200 dark:prose-dark">
 				<?php the_excerpt(); ?>
 			</div>
 
