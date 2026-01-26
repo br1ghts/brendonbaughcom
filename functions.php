@@ -212,12 +212,13 @@ function bb_home_force_posts_per_page( $query ) {
 		return;
 	}
 
-	if ( ! $query->is_home() || ! $query->is_front_page() ) {
+	if ( ! $query->is_home() ) {
 		return;
 	}
 
 	$initial_posts_per_page = $query->get( 'posts_per_page' );
-	$query->set( 'posts_per_page', 12 );
+	$target_posts_per_page  = defined( 'BB_HOME_POSTS_PER_PAGE' ) ? (int) BB_HOME_POSTS_PER_PAGE : 50;
+	$query->set( 'posts_per_page', $target_posts_per_page );
 
 	if ( defined( 'BB_HOME_DEBUG' ) && BB_HOME_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
 		$template = get_query_template( 'home' ) ?: get_query_template( 'index' );
@@ -225,17 +226,18 @@ function bb_home_force_posts_per_page( $query ) {
 
 		error_log(
 			sprintf(
-				'bb_home_debug: front_page=%s home=%s main_query=%s posts_per_page(before)=%s template=%s',
+				'bb_home_debug: front_page=%s home=%s main_query=%s posts_per_page(before)=%s after=%s template=%s',
 				$query->is_front_page() ? '1' : '0',
 				$query->is_home() ? '1' : '0',
 				$query->is_main_query() ? '1' : '0',
 				$initial_posts_per_page,
+				$query->get( 'posts_per_page' ),
 				$template
 			)
 		);
 	}
 }
-add_action( 'pre_get_posts', 'bb_home_force_posts_per_page', 20 );
+add_action( 'pre_get_posts', 'bb_home_force_posts_per_page', 25 );
 
 /**
  * Load WooCommerce compatibility file.
