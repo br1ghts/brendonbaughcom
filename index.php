@@ -41,6 +41,7 @@ get_header();
 				];
 				$featured_query = new WP_Query( $featured_args );
 				$slider_posts  = $featured_query->have_posts() ? $featured_query->posts : [];
+				$featured_ids  = wp_list_pluck( $slider_posts, 'ID' );
 				wp_reset_postdata();
 
 				if ( count( $slider_posts ) < 3 ) {
@@ -60,7 +61,6 @@ get_header();
 				}
 
 				$slider_posts = array_slice( $slider_posts, 0, 3 );
-				$slider_ids   = wp_list_pluck( $slider_posts, 'ID' );
 				?>
 
 				<?php if ( $slider_posts ) : ?>
@@ -177,7 +177,7 @@ get_header();
 						$post_index = 0;
 						while ( have_posts() ) :
 							the_post();
-							if ( $slider_ids && in_array( get_the_ID(), $slider_ids, true ) ) {
+							if ( $featured_ids && in_array( get_the_ID(), $featured_ids, true ) ) {
 								continue;
 							}
 							$post_index++;
