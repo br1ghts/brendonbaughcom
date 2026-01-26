@@ -98,7 +98,7 @@ if ( is_singular() ) :
 								<?php endif; ?>
 							</header>
 
-							<div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] dark:text-slate-200 dark:prose-dark">
+								<div class="entry-content prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] [&_iframe]:w-full [&_iframe]:max-w-full [&_iframe]:rounded-2xl [&_iframe]:border [&_iframe]:border-[#F2A25C]/30 [&_iframe]:shadow-lg [&_iframe]:bg-white [&_iframe]:dark:bg-slate-900 [&_iframe]:mx-auto [&_iframe]:transition [&_iframe]:duration-300 [&_iframe]:ease-in-out [&_video]:w-full [&_video]:rounded-2xl [&_video]:shadow-lg dark:text-slate-200 dark:prose-dark">
 								<?php
 								the_content();
 								wp_link_pages(

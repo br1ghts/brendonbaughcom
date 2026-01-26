@@ -110,6 +110,106 @@ function brendon_core_customize_social_links( $wp_customize ) {
 add_action( 'customize_register', 'brendon_core_customize_social_links' );
 
 /**
+ * Customize the Live Now page settings.
+ *
+ * @param WP_Customize_Manager $wp_customize
+ */
+function brendon_core_customize_live_now( $wp_customize ) {
+	$wp_customize->add_section(
+		'brendon_core_live_now',
+		array(
+			'title'       => esc_html__( 'Live Now', 'brendon-core' ),
+			'description' => esc_html__( 'Configure the Twitch embeds and schedule.', 'brendon-core' ),
+			'priority'    => 150,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'bb_live_twitch_channel',
+		array(
+			'default'           => 'mr__brights1de',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'bb_live_twitch_channel',
+		array(
+			'label'       => esc_html__( 'Twitch channel', 'brendon-core' ),
+			'section'     => 'brendon_core_live_now',
+			'type'        => 'text',
+			'description' => esc_html__( 'Channel used for player and chat embeds. Env TWITCH_CHANNEL overrides this.', 'brendon-core' ),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'bb_live_parent_domain',
+		array(
+			'default'           => 'brendonbaugh.com',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'bb_live_parent_domain',
+		array(
+			'label'       => esc_html__( 'Embed parent domain', 'brendon-core' ),
+			'section'     => 'brendon_core_live_now',
+			'type'        => 'text',
+			'description' => esc_html__( 'Used for Twitch embed parent parameter. Env TWITCH_PARENT overrides this.', 'brendon-core' ),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'bb_live_twitch_client_id',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'bb_live_twitch_client_id',
+		array(
+			'label'   => esc_html__( 'Twitch API Client ID', 'brendon-core' ),
+			'section' => 'brendon_core_live_now',
+			'type'    => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'bb_live_twitch_client_secret',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+	$wp_customize->add_control(
+		'bb_live_twitch_client_secret',
+		array(
+			'label'   => esc_html__( 'Twitch API Client Secret', 'brendon-core' ),
+			'section' => 'brendon_core_live_now',
+			'type'    => 'password',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'bb_live_schedule_json',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		)
+	);
+	$wp_customize->add_control(
+		'bb_live_schedule_json',
+		array(
+			'label'       => esc_html__( 'Schedule JSON', 'brendon-core' ),
+			'section'     => 'brendon_core_live_now',
+			'type'        => 'textarea',
+			'description' => esc_html__( 'Array of day/time/title objects, e.g. [{"day":"Wed","time":"8PM ET","title":"Cozy Chat"}].', 'brendon-core' ),
+		)
+	);
+}
+add_action( 'customize_register', 'brendon_core_customize_live_now' );
+
+/**
  * Render the site title for the selective refresh partial.
  *
  * @return void

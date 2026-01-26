@@ -154,8 +154,15 @@ function _s_scripts()
 {
 	wp_enqueue_style('_s-style', get_stylesheet_uri(), array(), _S_VERSION);
 	wp_style_add_data('_s-style', 'rtl', 'replace');
+	wp_enqueue_style('brendon-core-embed-style', get_template_directory_uri() . '/assets/css/embeds.css', array('_s-style'), _S_VERSION);
+	if ( is_page_template( 'page-live-now.php' ) ) {
+		wp_enqueue_style( 'brendon-core-live-now', get_template_directory_uri() . '/assets/css/live-now.css', array( '_s-style' ), _S_VERSION );
+	}
 
 	wp_enqueue_script('_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+	if (is_singular()) {
+		wp_enqueue_script('brendon-core-embed-script', get_template_directory_uri() . '/assets/js/embeds.js', array(), _S_VERSION, true);
+	}
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -182,6 +189,7 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/live-now.php';
 
 /**
  * Load Jetpack compatibility file.
@@ -197,7 +205,6 @@ if (class_exists('WooCommerce')) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
 
-
 /**
  * Register availability of the sidebar menu once translations are ready.
  */
@@ -208,3 +215,122 @@ function brendon_core_register_sidebar_menu()
 	]);
 }
 add_action('init', 'brendon_core_register_sidebar_menu');
+
+/**
+ * Adds a featured post checkbox to the post edit screen.
+ */
+function brendon_core_add_featured_meta_box()
+{
+	add_meta_box(
+		'brendon_core_featured_post',
+		esc_html__('Feature in Slider', 'brendon-core'),
+		'brendon_core_featured_meta_box_callback',
+		'post',
+		'side',
+		'high'
+	);
+}
+add_action('add_meta_boxes', 'brendon_core_add_featured_meta_box');
+
+/**
+ * Callback for rendering the featured checkbox.
+ *
+ * @param WP_Post $post
+ */
+function brendon_core_featured_meta_box_callback($post)
+{
+	wp_nonce_field('brendon_core_save_featured_meta', 'brendon_core_featured_nonce');
+	$value = get_post_meta($post->ID, 'brendon_core_featured_post', true);
+	?>
+	<label>
+		<input type="checkbox" name="brendon_core_featured_post" value="1" <?php checked($value, '1'); ?> />
+		<?php esc_html_e('Feature this post in the homepage slider', 'brendon-core'); ?>
+	</label>
+	<?php
+}
+
+/**
+ * Saves the featured post flag.
+ *
+ * @param int $post_id
+ */
+function brendon_core_save_featured_meta($post_id)
+{
+	if (!isset($_POST['brendon_core_featured_nonce']) || !wp_verify_nonce($_POST['brendon_core_featured_nonce'], 'brendon_core_save_featured_meta')) {
+		return;
+	}
+
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+
+	if (!current_user_can('edit_post', $post_id)) {
+		return;
+	}
+
+	$flag = isset($_POST['brendon_core_featured_post']) ? '1' : '0';
+	update_post_meta($post_id, 'brendon_core_featured_post', $flag);
+}
+add_action('save_post', 'brendon_core_save_featured_meta');
+
+/**
+ * Wrap embeds in a styled responsive container.
+ *
+ * @param string $html    The embed HTML.
+ * @param string $url     The source URL.
+ * @param array  $attr    Embed attributes.
+ * @param int    $post_id Post ID.
+ * @return string
+ */
+function brendon_core_responsive_embed( $html, $url, $attr, $post_id ) {
+	if ( false === stripos( $html, '<iframe' ) ) {
+		return $html;
+	}
+
+	$host = wp_parse_url( $url, PHP_URL_HOST );
+	$host = $host ? strtolower( str_replace( 'www.', '', $host ) ) : '';
+
+	$aspect = 'aspect-[16/9]';
+	$label  = '';
+
+	if ( str_contains( $host, 'spotify' ) ) {
+		$aspect = '';
+		$label  = esc_html__( 'Spotify', 'brendon-core' );
+	} elseif ( str_contains( $host, 'youtu' ) ) {
+		$aspect = 'lg:aspect-[21/9]';
+		$label  = esc_html__( 'YouTube', 'brendon-core' );
+	}
+
+	$wide_html = preg_replace( '/(width|height)="\d*"/i', '', $html );
+	$enhanced  = preg_replace(
+		'/<iframe([^>]*)>/i',
+		'<iframe$1 loading="lazy" class="h-full w-full rounded-2xl border-0 bg-slate-900/5 dark:bg-slate-900" referrerpolicy="no-referrer" allowfullscreen>',
+		$wide_html,
+		1
+	);
+
+	$label_html = $label
+		? sprintf(
+			'<span class="pointer-events-none absolute left-4 top-4 rounded-full bg-[#F26D3D]/90 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm">%s</span>',
+			esc_html( $label )
+		)
+		: '';
+
+	$wrapper_classes = 'relative w-full overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-lg ring-1 ring-slate-900/5 transition focus-within:ring-2 focus-within:ring-[#F2A25C]/60 dark:border-[#F2A25C]/20 dark:bg-slate-900 dark:ring-slate-100/5';
+
+	if ( str_contains( $host, 'spotify' ) ) {
+		$wrapper_classes .= ' h-[120px] sm:h-[150px]';
+	} else {
+		$wrapper_classes .= " aspect-[16/9] $aspect";
+	}
+
+	$wrapper = '<div class="%1$s">%2$s<div class="relative h-full w-full">%3$s</div></div>';
+
+	return sprintf(
+		$wrapper,
+		esc_attr( trim( $wrapper_classes ) ),
+		$label_html,
+		$enhanced
+	);
+}
+add_filter( 'embed_oembed_html', 'brendon_core_responsive_embed', 20, 4 );
