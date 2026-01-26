@@ -199,6 +199,45 @@ if (defined('JETPACK__VERSION')) {
 }
 
 /**
+ * Ensure the homepage grid always pulls the full set of posts we expect.
+ *
+ * Uses the blog index template and runs only on the front-end main query so other
+ * archives remain untouched. When BB_HOME_DEBUG is true (and WP_DEBUG_LOG is enabled)
+ * it records the conditional flags, posts_per_page value, and selected template.
+ *
+ * @param WP_Query $query The query instance.
+ */
+function bb_home_force_posts_per_page( $query ) {
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	if ( ! $query->is_home() || ! $query->is_front_page() ) {
+		return;
+	}
+
+	$initial_posts_per_page = $query->get( 'posts_per_page' );
+	$query->set( 'posts_per_page', 12 );
+
+	if ( defined( 'BB_HOME_DEBUG' ) && BB_HOME_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+		$template = get_query_template( 'home' ) ?: get_query_template( 'index' );
+		$template = $template ? wp_basename( $template ) : 'unknown';
+
+		error_log(
+			sprintf(
+				'bb_home_debug: front_page=%s home=%s main_query=%s posts_per_page(before)=%s template=%s',
+				$query->is_front_page() ? '1' : '0',
+				$query->is_home() ? '1' : '0',
+				$query->is_main_query() ? '1' : '0',
+				$initial_posts_per_page,
+				$template
+			)
+		);
+	}
+}
+add_action( 'pre_get_posts', 'bb_home_force_posts_per_page', 20 );
+
+/**
  * Load WooCommerce compatibility file.
  */
 if (class_exists('WooCommerce')) {
