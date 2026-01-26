@@ -56,24 +56,23 @@ $social_links = brendon_core_get_sidebar_social_links();
 
 		<div class="rounded-lg border border-[#F2A25C]/30 bg-[#F2F2F2] p-3 dark:bg-slate-950">
 			<p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"><?php esc_html_e( 'Social links', 'brendon-core' ); ?></p>
-			<div class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+			<div class="mt-3 flex flex-wrap items-center justify-center gap-3 text-slate-700 dark:text-slate-200">
 				<?php foreach ( $social_links as $social ) : ?>
-					<a href="<?php echo esc_url( $social['url'] ); ?>" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-lg border border-transparent bg-white px-3 py-2 transition hover:border-[#F2A25C]/40 hover:bg-[#F2EB8D]/40 dark:bg-slate-900 dark:border-slate-800">
-						<span class="flex h-5 w-5 items-center justify-center rounded-full border border-[#F2A25C]/20 bg-white text-[#F26D3D] dark:border-[#F2A25C]/30 dark:bg-slate-900">
+					<a href="<?php echo esc_url( $social['url'] ); ?>" target="_blank" rel="noopener noreferrer" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#F2A25C]/30 bg-white text-[#F26D3D] transition hover:bg-[#F2EB8D]/40 dark:border-slate-800 dark:bg-slate-900">
+						<span class="sr-only"><?php echo esc_html( $social['label'] ); ?></span>
+						<span class="flex h-5 w-5 items-center justify-center">
 							<?php echo brendon_core_get_social_icon_svg( $social['icon'], 'h-4 w-4' ); ?>
 						</span>
-						<span><?php echo esc_html( $social['label'] ); ?></span>
 					</a>
 				<?php endforeach; ?>
+				<button data-theme-toggle type="button" class="flex h-11 w-11 items-center justify-center rounded-full border border-[#F2A25C]/30 bg-white text-[#F26D3D] transition hover:bg-[#F2EB8D]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 dark:border-slate-800 dark:bg-slate-900">
+					<span class="sr-only"><?php esc_html_e( 'Toggle light and dark mode', 'brendon-core' ); ?></span>
+					<span class="relative flex h-5 w-5 items-center justify-center">
+						<svg class="absolute h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.41 1.41M18.36 18.36l1.41 1.41M1 12h2M21 12h2M4.22 19.78l1.41-1.41M18.36 5.64l1.41-1.41"></path></svg>
+						<svg class="absolute hidden h-5 w-5 dark:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1019 12.79z"></path></svg>
+					</span>
+				</button>
 			</div>
-			<button data-theme-toggle type="button" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-[#F2A25C]/30 bg-white px-3 py-2 text-sm font-semibold text-slate-900 transition hover:border-[#F2A25C]/40 hover:bg-[#F2EB8D]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2A25C]/70 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700">
-				<span class="sr-only"><?php esc_html_e( 'Toggle light and dark mode', 'brendon-core' ); ?></span>
-				<span class="inline-flex items-center gap-2">
-					<svg class="h-5 w-5 text-[#F26D3D] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.41 1.41M18.36 18.36l1.41 1.41M1 12h2M21 12h2M4.22 19.78l1.41-1.41M18.36 5.64l1.41-1.41"></path></svg>
-					<svg class="hidden h-5 w-5 text-[#F26D3D] dark:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1019 12.79z"></path></svg>
-					<span><?php esc_html_e( 'Toggle theme', 'brendon-core' ); ?></span>
-				</span>
-			</button>
 		</div>
 	</div>
 </details>
