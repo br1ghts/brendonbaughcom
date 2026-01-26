@@ -22,12 +22,7 @@ get_header();
 
 			<section class="lg:col-span-9 space-y-6">
 
-				<header class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-					<div class="flex flex-col gap-3">
-						<?php the_archive_title('<h1 class="text-2xl font-semibold tracking-tight">', '</h1>'); ?>
-						<?php the_archive_description('<p class="text-sm text-slate-600">', '</p>'); ?>
-					</div>
-				</header>
+
 
 				<?php if (have_posts()) : ?>
 

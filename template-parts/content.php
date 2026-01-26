@@ -62,11 +62,11 @@ if ( is_singular() ) :
 						<div class="flex flex-col gap-4">
 
 							<?php if ( $has_thumb ) : ?>
-								<div class="overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-sm">
-									<?php the_post_thumbnail( 'large', [ 'class' => 'h-auto w-full object-cover transition duration-300 group-hover:scale-105' ] ); ?>
+								<div class="overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-sm max-h-[420px]">
+									<?php the_post_thumbnail( 'large', [ 'class' => 'h-full w-full object-cover transition duration-300 group-hover:scale-105' ] ); ?>
 								</div>
 							<?php else : ?>
-								<div class="flex h-52 items-center justify-center rounded-2xl border border-[#F2A25C]/30 bg-gradient-to-r from-[#F2EB8D]/40 via-[#F2F2F2]/70 to-[#F2F2F2]/70 text-sm font-semibold uppercase tracking-wide text-slate-500">
+								<div class="flex h-64 items-center justify-center rounded-2xl border border-[#F2A25C]/30 bg-gradient-to-r from-[#F2EB8D]/40 via-[#F2F2F2]/70 to-[#F2F2F2]/70 text-sm font-semibold uppercase tracking-wide text-slate-500">
 									<?php esc_html_e( 'No featured image', 'brendon-core' ); ?>
 								</div>
 							<?php endif; ?>
@@ -95,7 +95,7 @@ if ( is_singular() ) :
 								<?php endif; ?>
 							</header>
 
-							<div class="prose prose-slate max-w-none text-slate-600 prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg">
+							<div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29]">
 								<?php
 								the_content();
 								wp_link_pages(
@@ -135,11 +135,11 @@ if ( is_singular() ) :
 		<div class="flex flex-col gap-4">
 
 			<?php if ( $has_thumb ) : ?>
-				<a class="overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-sm transition duration-300 group-hover:shadow-lg" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( $title ); ?>">
-					<?php the_post_thumbnail( 'large', [ 'class' => 'h-auto w-full object-cover transition duration-300 group-hover:scale-105' ] ); ?>
+				<a class="overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-sm transition duration-300 group-hover:shadow-lg h-64" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( $title ); ?>">
+					<?php the_post_thumbnail( 'large', [ 'class' => 'h-full w-full object-cover transition duration-300 group-hover:scale-105' ] ); ?>
 				</a>
 			<?php else : ?>
-				<div class="flex h-48 items-center justify-center rounded-2xl border border-[#F2A25C]/30 bg-gradient-to-r from-[#F2EB8D]/40 via-[#F2F2F2]/80 to-[#F2F2F2]/80 text-sm font-semibold uppercase tracking-wide text-slate-500">
+				<div class="flex h-64 items-center justify-center rounded-2xl border border-[#F2A25C]/30 bg-gradient-to-r from-[#F2EB8D]/40 via-[#F2F2F2]/80 to-[#F2F2F2]/80 text-sm font-semibold uppercase tracking-wide text-slate-500">
 					<?php esc_html_e( 'No featured image', 'brendon-core' ); ?>
 				</div>
 			<?php endif; ?>
@@ -170,7 +170,7 @@ if ( is_singular() ) :
 				<?php endif; ?>
 			</header>
 
-			<div class="prose prose-slate max-w-none text-slate-700 leading-relaxed prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg">
+			<div class="prose prose-lg prose-slate max-w-none text-slate-700 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29]">
 				<?php the_excerpt(); ?>
 			</div>
 
