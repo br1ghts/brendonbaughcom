@@ -56,6 +56,7 @@ $sidebar_items = function_exists('brendon_core_get_sidebar_menu_items') ? brendo
 		<ul class="mt-2 space-y-1 text-sm text-slate-700">
 			<li><a href="https://youtube.com"><?php esc_html_e('YouTube', 'brendon-core'); ?></a></li>
 			<li><a href="https://twitch.tv"><?php esc_html_e('Twitch', 'brendon-core'); ?></a></li>
+			<li><a href="https://instagram.com"><?php esc_html_e('Instagram', 'brendon-core'); ?></a></li>
 		</ul>
 	</div>
 </div>
