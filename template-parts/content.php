@@ -42,7 +42,14 @@ if ( 'post' === get_post_type() ) {
 	);
 }
 
-	$card_classes = 'group relative overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-[1px] hover:border-[#F2A25C]/60 hover:shadow-lg focus-within:-translate-y-[1px] focus-within:border-[#F2A25C]/60 focus-within:shadow-lg dark:bg-slate-900 dark:border-[#F2A25C]/20 dark:text-slate-100';
+		$card_classes = 'group relative overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-[1px] hover:border-[#F2A25C]/60 hover:shadow-lg focus-within:-translate-y-[1px] focus-within:border-[#F2A25C]/60 focus-within:shadow-lg dark:bg-slate-900 dark:border-[#F2A25C]/20 dark:text-slate-100';
+		$content_card_classes = is_singular() ? $card_classes : $card_classes . ' flex flex-col gap-4 h-full';
+		if ( ! is_singular() ) {
+			$tile_span = get_query_var( 'content_tile_span', '' );
+			if ( $tile_span ) {
+				$content_card_classes .= " {$tile_span}";
+			}
+		}
 
 if ( is_singular() ) :
 	?>
@@ -60,7 +67,7 @@ if ( is_singular() ) :
 
 				<section class="lg:col-span-9 space-y-6">
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class( $card_classes ); ?>>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( $content_card_classes ); ?>>
 
 						<div class="flex flex-col gap-4">
 
@@ -134,7 +141,7 @@ if ( is_singular() ) :
 
 <?php else : ?>
 
-	<article id="post-<?php the_ID(); ?>" <?php post_class( $card_classes ); ?>>
+	<article id="post-<?php the_ID(); ?>" <?php post_class( $content_card_classes ); ?>>
 		<div class="flex flex-col gap-4">
 
 			<?php if ( $has_thumb ) : ?>
@@ -174,7 +181,8 @@ if ( is_singular() ) :
 			</header>
 
 			<div class="prose prose-lg prose-slate max-w-none text-slate-700 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] dark:text-slate-200 dark:prose-dark">
-				<?php the_excerpt(); ?>
+				<?php $archive_excerpt = wp_trim_words( get_the_excerpt(), 16, '…' ); ?>
+				<p><?php echo esc_html( $archive_excerpt ); ?></p>
 			</div>
 
 			<div>

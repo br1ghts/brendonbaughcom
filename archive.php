@@ -11,8 +11,8 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main min-h-screen bg-slate-50">
-	<div class="w-full px-6 py-8">
+<main id="primary" class="site-main min-h-screen bg-[#F2F2F2] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+	<div class="w-full px-6 py-8 space-y-8">
 
 		<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 
@@ -26,12 +26,50 @@ get_header();
 
 				<?php if (have_posts()) : ?>
 
-					<div class="grid grid-cols-1 gap-6">
+					<?php
+					if ( is_category() ) {
+						$archive_heading = single_cat_title( '', false );
+					} elseif ( is_tag() ) {
+						$archive_heading = single_tag_title( '', false );
+					} elseif ( is_tax() ) {
+						$archive_heading = single_term_title( '', false );
+					} elseif ( is_post_type_archive() ) {
+						$archive_heading = post_type_archive_title( '', false );
+					} elseif ( is_author() ) {
+						$author_obj = get_queried_object();
+						$archive_heading = $author_obj ? ( $author_obj->display_name ?? '' ) : '';
+					} else {
+						$archive_heading = get_the_archive_title();
+					}
+
+					if ( ! $archive_heading ) {
+						$archive_heading = get_the_archive_title();
+					}
+					?>
+
+					<header class="rounded-3xl border border-[#F2A25C]/30 bg-white p-8 shadow-lg dark:border-[#F2A25C]/20 dark:bg-slate-900">
+						<p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#F2A25C]"><?php esc_html_e('Archive', 'brendon-core'); ?></p>
+						<h1 class="mt-3 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
+							<?php echo esc_html( $archive_heading ); ?>
+						</h1>
+						<?php if (is_category() || is_tag() || is_post_type_archive()) : ?>
+							<p class="mt-2 text-base text-slate-600 dark:text-slate-300">
+								<?php the_archive_description(); ?>
+							</p>
+						<?php endif; ?>
+					</header>
+
+					<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 						<?php
+						$post_index = 0;
 						while (have_posts()) :
 							the_post();
-							get_template_part('template-parts/content');
+							$post_index++;
+							$span_class = 0 === $post_index % 5 ? 'lg:col-span-2' : '';
+							set_query_var('grid_span', $span_class);
+							get_template_part('template-parts/card-grid');
 						endwhile;
+						set_query_var('grid_span', '');
 						?>
 					</div>
 
