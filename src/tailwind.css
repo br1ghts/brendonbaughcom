@@ -1,0 +1,11 @@
+/*
+Theme Name: Brendon Core
+Theme URI: https://brendonbaugh.com
+Author: Brendon Baugh
+Description: System-first WordPress theme with Tailwind
+Version: 0.1
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
