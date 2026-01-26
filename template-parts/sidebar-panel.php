@@ -14,12 +14,38 @@ $social_links = brendon_core_get_sidebar_social_links();
 
 <div class="flex flex-col gap-6 rounded-2xl border border-[#F2A25C]/30 bg-white p-6 shadow-sm dark:bg-slate-900 dark:border-[#F2A25C]/20">
 
-	<div class="space-y-1">
-		<h2 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-white"><?php echo esc_html($site_title); ?></h2>
-		<?php if ($site_description) : ?>
-			<p class="text-sm text-slate-600 dark:text-slate-300"><?php echo esc_html($site_description); ?></p>
-		<?php endif; ?>
-	</div>
+	<?php
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	if ( $custom_logo_id ) :
+		$logo_img = wp_get_attachment_image(
+			$custom_logo_id,
+			'medium',
+			false,
+			[
+				'class' => 'h-full w-full object-cover',
+				'alt'   => esc_attr( $site_title ),
+			]
+		);
+		?>
+		<div class="flex justify-center">
+			<a class="h-[180px] w-[180px] overflow-hidden rounded-full border border-[#F2A25C]/20 bg-white shadow-sm dark:border-[#F2A25C]/30 dark:bg-slate-900" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( $site_title ); ?>">
+				<?php echo $logo_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</a>
+		</div>
+		<div class="text-center space-y-1">
+			<h2 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-white"><?php echo esc_html( $site_title ); ?></h2>
+			<?php if ( $site_description ) : ?>
+				<p class="text-sm text-slate-600 dark:text-slate-300"><?php echo esc_html( $site_description ); ?></p>
+			<?php endif; ?>
+		</div>
+	<?php else : ?>
+		<div class="space-y-1">
+			<h2 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-white"><?php echo esc_html( $site_title ); ?></h2>
+			<?php if ( $site_description ) : ?>
+				<p class="text-sm text-slate-600 dark:text-slate-300"><?php echo esc_html( $site_description ); ?></p>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 
 	<nav class="space-y-2" aria-label="<?php echo esc_attr_x('Sidebar menu', 'aria label', 'brendon-core'); ?>">
 		<?php if (has_nav_menu('sidebar')) : ?>

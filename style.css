@@ -1568,6 +1568,18 @@ video {
   height: 2.75rem;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
+.h-32 {
+  height: 8rem;
+}
+
+.h-\[180px\] {
+  height: 180px;
+}
+
 .max-h-\[420px\] {
   max-height: 420px;
 }
@@ -1598,6 +1610,18 @@ video {
 
 .w-11 {
   width: 2.75rem;
+}
+
+.w-24 {
+  width: 6rem;
+}
+
+.w-32 {
+  width: 8rem;
+}
+
+.w-\[180px\] {
+  width: 180px;
 }
 
 .min-w-full {
