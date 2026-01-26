@@ -28,7 +28,6 @@ function _s_setup()
 		* If you're building a theme based on _s, use a find and replace
 		* to change '_s' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain('_s', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support('automatic-feed-links');
@@ -103,6 +102,16 @@ function _s_setup()
 	);
 }
 add_action('after_setup_theme', '_s_setup');
+
+/**
+ * Load the theme textdomains after init so WordPress hooks translation loading later.
+ */
+function brendon_core_load_textdomains()
+{
+	load_theme_textdomain('_s', get_template_directory() . '/languages');
+	load_theme_textdomain('brendon-core', get_template_directory() . '/languages');
+}
+add_action('init', 'brendon_core_load_textdomains');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -189,6 +198,13 @@ if (class_exists('WooCommerce')) {
 }
 
 
-register_nav_menus([
-	'sidebar' => esc_html__('Sidebar Menu', 'brendon-core'),
-]);
+/**
+ * Register availability of the sidebar menu once translations are ready.
+ */
+function brendon_core_register_sidebar_menu()
+{
+	register_nav_menus([
+		'sidebar' => esc_html__('Sidebar Menu', 'brendon-core'),
+	]);
+}
+add_action('init', 'brendon_core_register_sidebar_menu');

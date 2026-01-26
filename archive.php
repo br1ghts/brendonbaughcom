@@ -12,7 +12,7 @@ get_header();
 ?>
 
 <main id="primary" class="site-main min-h-screen bg-slate-50">
-	<div class="mx-auto w-full max-w-7xl px-6 py-10">
+	<div class="w-full px-6 py-8">
 
 		<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
 
