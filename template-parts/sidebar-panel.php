@@ -54,7 +54,7 @@ $social_links = brendon_core_get_sidebar_social_links();
 		</div>
 	</form>
 
-			<div class="rounded-xl border border-[#F2A25C]/30 bg-[#F2F2F2] p-4 dark:bg-slate-900 dark:border-[#F2A25C]/20">
+		<div class="rounded-xl border border-[#F2A25C]/30 bg-[#F2F2F2] p-4 dark:bg-slate-900 dark:border-[#F2A25C]/20">
 				<div class="flex items-center justify-between">
 					<p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300"><?php esc_html_e('Socials', 'brendon-core'); ?></p>
 				</div>
@@ -79,6 +79,10 @@ $social_links = brendon_core_get_sidebar_social_links();
 				</span>
 			</button>
 		</div>
+
+	<div class="mt-4 text-xs text-center text-slate-500 dark:text-slate-400">
+		<?php printf( wp_kses_post( __( 'Theme made by <a class="font-semibold text-[#F26D3D] hover:text-[#F24E29]" href="%1$s">Brendon Baugh</a>.', 'brendon-core' ) ), esc_url( 'https://brendonbaugh.com' ) ); ?>
+	</div>
 
 </div>
 <script>
