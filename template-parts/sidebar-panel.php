@@ -14,11 +14,15 @@ $sidebar_items = function_exists('brendon_core_get_sidebar_menu_items') ? brendo
 <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 	<h2 class="text-xl font-semibold tracking-tight"><?php echo esc_html($site_title); ?></h2>
 
-	<?php if ($site_description) : ?>
-		<p class="mt-2 text-sm text-slate-600"><?php echo esc_html($site_description); ?></p>
-	<?php endif; ?>
 
 	<nav class="mt-6" aria-label="<?php echo esc_attr_x('Sidebar menu', 'aria label', 'brendon-core'); ?>">
+		<form role="search" method="get" class="mt-6" action="<?php echo esc_url(home_url('/')); ?>">
+			<label class="sr-only" for="sidebar-search">Search</label>
+			<div class="flex">
+				<input id="sidebar-search" name="s" type="search" placeholder="<?php esc_attr_e('Search posts…', 'brendon-core'); ?>" class="w-full rounded-l-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
+				<button type="submit" class="rounded-r-lg border border-slate-900 bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800"><?php esc_html_e('Go', 'brendon-core'); ?></button>
+			</div>
+		</form>
 		<?php if (! empty($sidebar_items)) : ?>
 			<ul class="space-y-2 text-sm">
 				<?php foreach ($sidebar_items as $item) :
@@ -33,23 +37,11 @@ $sidebar_items = function_exists('brendon_core_get_sidebar_menu_items') ? brendo
 					</li>
 				<?php endforeach; ?>
 			</ul>
-		<?php else : ?>
-			<ul class="space-y-2 text-sm">
-				<li><a class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-50" href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'brendon-core'); ?></a></li>
-				<li><a class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-50" href="<?php echo esc_url(home_url('/writing')); ?>"><?php esc_html_e('Writing', 'brendon-core'); ?></a></li>
-				<li><a class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-50" href="<?php echo esc_url(home_url('/work')); ?>"><?php esc_html_e('Work', 'brendon-core'); ?></a></li>
-				<li><a class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-slate-50" href="<?php echo esc_url(home_url('/about')); ?>"><?php esc_html_e('About', 'brendon-core'); ?></a></li>
-			</ul>
+
 		<?php endif; ?>
 	</nav>
 
-	<form role="search" method="get" class="mt-6" action="<?php echo esc_url(home_url('/')); ?>">
-		<label class="sr-only" for="sidebar-search">Search</label>
-		<div class="flex">
-			<input id="sidebar-search" name="s" type="search" placeholder="<?php esc_attr_e('Search posts…', 'brendon-core'); ?>" class="w-full rounded-l-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
-			<button type="submit" class="rounded-r-lg border border-slate-900 bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800"><?php esc_html_e('Go', 'brendon-core'); ?></button>
-		</div>
-	</form>
+
 
 	<div class="mt-6 rounded-lg bg-slate-50 p-4">
 		<div class="text-xs font-medium uppercase tracking-wider text-slate-500"><?php esc_html_e('Socials', 'brendon-core'); ?></div>
