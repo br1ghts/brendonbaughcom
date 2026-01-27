@@ -119,7 +119,7 @@ get_header();
 							<div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
 							<div class="relative flex justify-center">
 								<span class="pl-3 pr-2 text-base font-semibold text-gray-900 dark:text-white">Latest</span>
-								<span class="pr-3 text-base font-semibold text-gray-900 dark:text-white">Post</span>
+								<span class="pr-3 text-base font-semibold text-gray-900 dark:text-white">Posts</span>
 							</div>
 							<div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
 						</div>
