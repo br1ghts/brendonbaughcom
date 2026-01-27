@@ -296,3 +296,75 @@ function brendon_core_sidebar_menu_link_attributes( $atts, $item, $args, $depth 
 	return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'brendon_core_sidebar_menu_link_attributes', 20, 4 );
+
+/**
+ * Helper to determine whether a post is marked as a video post.
+ *
+ * @param int $post_id
+ * @return bool
+ */
+function brendon_core_is_video_post( $post_id = 0 ) {
+	$post_id = absint( $post_id ?: get_the_ID() );
+
+	if ( ! $post_id ) {
+		return false;
+	}
+
+	return '1' === get_post_meta( $post_id, 'brendon_core_is_video_post', true );
+}
+
+/**
+ * Registers the meta box that lets editors flag a post as a video.
+ */
+function brendon_core_register_video_post_meta_box() {
+	add_meta_box(
+		'brendon_core_video_post',
+		esc_html__( 'Video post', 'brendon-core' ),
+		'brendon_core_render_video_post_meta_box',
+		'post',
+		'side',
+		'core'
+	);
+}
+add_action( 'add_meta_boxes', 'brendon_core_register_video_post_meta_box' );
+
+/**
+ * Renders the video post checkbox UI.
+ *
+ * @param WP_Post $post
+ */
+function brendon_core_render_video_post_meta_box( $post ) {
+	wp_nonce_field( 'brendon_core_video_post_meta', 'brendon_core_video_post_nonce' );
+
+	printf(
+		'<p><label><input type="checkbox" id="brendon_core_video_post_flag" name="brendon_core_video_post_flag" value="1" %s /> %s</label></p>',
+		checked( brendon_core_is_video_post( $post->ID ), true, false ),
+		esc_html__( 'Hide the featured image on the single post view.', 'brendon-core' )
+	);
+
+	echo '<p class="description">' . esc_html__( 'Use this when a post primarily features an embed/video rather than a cover image.', 'brendon-core' ) . '</p>';
+}
+
+/**
+ * Saves the video post flag when the post is saved.
+ *
+ * @param int $post_id
+ */
+function brendon_core_save_video_post_meta_box( $post_id ) {
+	if ( ! isset( $_POST['brendon_core_video_post_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['brendon_core_video_post_nonce'] ), 'brendon_core_video_post_meta' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$is_video = isset( $_POST['brendon_core_video_post_flag'] );
+
+	update_post_meta( $post_id, 'brendon_core_is_video_post', $is_video ? '1' : '0' );
+}
+add_action( 'save_post', 'brendon_core_save_video_post_meta_box' );
