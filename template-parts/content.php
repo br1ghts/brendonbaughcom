@@ -69,7 +69,7 @@ if ( is_singular() ) :
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class( $content_card_classes ); ?>>
 
-						<div class="flex flex-col gap-4">
+						<div class="flex flex-col gap-3">
 
 							<?php if ( $has_thumb ) : ?>
 								<div class="overflow-hidden rounded-2xl border border-[#F2A25C]/30 bg-white shadow-sm max-h-[420px]">
@@ -105,7 +105,7 @@ if ( is_singular() ) :
 								<?php endif; ?>
 							</header>
 
-								<div class="entry-content prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] [&_iframe]:w-full [&_iframe]:max-w-full [&_iframe]:rounded-2xl [&_iframe]:border [&_iframe]:border-[#F2A25C]/30 [&_iframe]:shadow-lg [&_iframe]:bg-white [&_iframe]:dark:bg-slate-900 [&_iframe]:mx-auto [&_iframe]:transition [&_iframe]:duration-300 [&_iframe]:ease-in-out [&_video]:w-full [&_video]:rounded-2xl [&_video]:shadow-lg dark:text-slate-200 dark:prose-dark prose-p:mt-0 prose-p:mb-3 prose-figure:mt-3 prose-figure:mb-3 prose-iframe:mt-3 prose-iframe:mb-3">
+								<div class="entry-content prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed prose-headings:text-slate-900 prose-headings:font-semibold prose-blockquote:border-[#F2A25C] prose-blockquote:border-l-4 prose-blockquote:bg-[#F2EB8D]/20 prose-blockquote:text-slate-800 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-a:text-[#F26D3D] prose-a:hover:text-[#F24E29] [&_iframe]:w-full [&_iframe]:max-w-full [&_iframe]:rounded-2xl [&_iframe]:border [&_iframe]:border-[#F2A25C]/30 [&_iframe]:shadow-lg [&_iframe]:bg-white [&_iframe]:dark:bg-slate-900 [&_iframe]:mx-auto [&_iframe]:transition [&_iframe]:duration-300 [&_iframe]:ease-in-out [&_video]:w-full [&_video]:rounded-2xl [&_video]:shadow-lg dark:text-slate-200 dark:prose-dark prose-p:mt-0 prose-p:mb-2 prose-figure:mt-2 prose-figure:mb-2 prose-iframe:mt-2 prose-iframe:mb-2">
 								<?php
 								the_content();
 								wp_link_pages(
