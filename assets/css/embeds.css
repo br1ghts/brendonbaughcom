@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  /* aspect-ratio: 16 / 9; */
   background: transparent;
 }
 
@@ -65,4 +65,14 @@
   height: auto;
   border: 0;
   position: static;
+}
+
+.entry-content figure.wp-block-embed,
+.entry-content figure.wp-block-embed .wp-block-embed__wrapper,
+.entry-content .wp-block-embed__wrapper,
+.entry-content .wp-block-embed iframe,
+.entry-content iframe,
+.entry-content video {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
