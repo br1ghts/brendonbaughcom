@@ -65,10 +65,7 @@ get_header();
 
 				<?php if ($slider_posts) : ?>
 					<section class="space-y-4 w-full">
-						<div class="flex items-center justify-between">
-							<h2 class="text-lg font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-100">
-								<?php esc_html_e('Featured', 'brendon-core'); ?>
-							</h2>
+						<!-- <div class="flex items-center justify-end">
 							<div class="flex gap-2">
 								<button data-slider-prev class="rounded-full border border-[#F2A25C]/40 bg-white p-2 text-[#F26D3D] shadow-sm transition hover:bg-[#F2EB8D]/60 dark:bg-slate-800 dark:border-[#F2A25C]/30">
 									<span class="sr-only"><?php esc_html_e('Previous featured post', 'brendon-core'); ?></span>
@@ -83,7 +80,7 @@ get_header();
 									</svg>
 								</button>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="relative w-full" role="region" aria-label="<?php esc_attr_e('Featured posts slider', 'brendon-core'); ?>">
 							<div data-slider-track class="flex w-full gap-4 overflow-x-auto pb-0 scroll-smooth snap-x snap-mandatory touch-pan-x scrollbar-hidden bg-transparent">
@@ -117,6 +114,16 @@ get_header();
 								<?php wp_reset_postdata(); ?>
 							</div>
 						</div>
+
+						<div class="flex items-center">
+							<div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
+							<div class="relative flex justify-center">
+								<span class="pl-3 pr-2 text-base font-semibold text-gray-900 dark:text-white">Latest</span>
+								<span class="pr-3 text-base font-semibold text-gray-900 dark:text-white">Post</span>
+							</div>
+							<div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
+						</div>
+
 					</section>
 					<script>
 						(function() {
