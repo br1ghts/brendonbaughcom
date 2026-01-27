@@ -91,11 +91,11 @@ get_header();
 									<?php setup_postdata($post); ?>
 									<?php $thumb_url = has_post_thumbnail($post) ? get_the_post_thumbnail_url($post, 'large') : ''; ?>
 									<article class="group relative min-w-full snap-start rounded-3xl border border-[#F2A25C]/30 bg-white p-6 transition hover:-translate-y-1  dark:border-[#F2A25C]/20 dark:bg-slate-900 animate-featuredWave">
-										<span class="absolute top-5 right-5 rounded-full bg-[#F26D3D]/90 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+										<span class="absolute top-5 right-5 z-20 rounded-full bg-[#F26D3D]/90 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
 											<?php esc_html_e('Featured', 'brendon-core'); ?>
 										</span>
 										<?php if ($thumb_url) : ?>
-											<div class="mb-4 overflow-hidden rounded-2xl bg-slate-100">
+											<div class="mb-4 overflow-hidden rounded-2xl bg-slate-100 z-0">
 												<div class="h-96 w-full overflow-hidden">
 													<img class="h-full w-full object-cover object-center transition duration-300 group-hover:scale-105" src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr(get_the_title($post)); ?>" />
 												</div>
