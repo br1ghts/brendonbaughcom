@@ -57,7 +57,7 @@ if (is_singular()) :
 ?>
 
 	<main id="primary" class="site-main min-h-screen bg-[#F2F2F2] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-		<div class="w-full px-6">
+		<div class="w-full px-6 py-8">
 			<div class="mb-6 lg:hidden">
 				<?php get_template_part('template-parts/mobile-sidebar-panel'); ?>
 			</div>
