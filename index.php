@@ -27,8 +27,9 @@ get_header();
 			<section class="space-y-6">
 
 				<?php
-				$featured_args = [
-					'posts_per_page'      => 3,
+				$slider_limit   = defined( 'BB_HOME_SLIDER_POSTS' ) ? (int) BB_HOME_SLIDER_POSTS : 3;
+				$featured_args  = [
+					'posts_per_page'      => $slider_limit,
 					'post_status'         => 'publish',
 					'ignore_sticky_posts' => true,
 					'meta_query'          => [
@@ -44,11 +45,11 @@ get_header();
 				$featured_ids  = wp_list_pluck($slider_posts, 'ID');
 				wp_reset_postdata();
 
-				if (count($slider_posts) < 3) {
+				if (count($slider_posts) < $slider_limit) {
 					$excluded       = wp_list_pluck($slider_posts, 'ID');
 					$fill_query     = new WP_Query(
 						[
-							'posts_per_page'      => 3 - count($slider_posts),
+							'posts_per_page'      => $slider_limit - count($slider_posts),
 							'post_status'         => 'publish',
 							'ignore_sticky_posts' => true,
 							'post__not_in'        => $excluded,
@@ -60,7 +61,7 @@ get_header();
 					wp_reset_postdata();
 				}
 
-				$slider_posts = array_slice($slider_posts, 0, 3);
+				$slider_posts = array_slice($slider_posts, 0, $slider_limit);
 				?>
 
 				<?php if ($slider_posts) : ?>
@@ -223,8 +224,8 @@ get_header();
 					?>
 
 					<?php if (! empty($pagination) && is_array($pagination)) : ?>
-						<nav class="mt-10" aria-label="<?php esc_attr_e('Posts pagination', 'brendon-core'); ?>">
-							<ul class="flex flex-wrap gap-2">
+					<nav class="mt-10" aria-label="<?php esc_attr_e('Posts pagination', 'brendon-core'); ?>">
+						<ul class="flex flex-wrap gap-2 justify-center">
 								<?php foreach ($pagination as $link) : ?>
 									<li class="[&>a]:inline-flex [&>a]:items-center [&>a]:rounded-lg [&>a]:border [&>a]:border-[#F2A25C]/30 [&>a]:bg-white [&>a]:px-3 [&>a]:py-2 [&>a]:text-sm [&>a]:text-slate-700 [&>a]:shadow-sm [&>a]:transition [&>a]:hover:bg-[#F2EB8D]/60 [&>a]:hover:text-slate-900 [&>a]:focus-visible:outline [&>a]:focus-visible:outline-2 [&>a]:focus-visible:outline-offset-2 [&>a]:focus-visible:outline-[#F2A25C]/70 [&>span]:inline-flex [&>span]:items-center [&>span]:rounded-lg [&>span]:border [&>span]:border-[#F24E29] [&>span]:bg-[#F24E29] [&>span]:px-3 [&>span]:py-2 [&>span]:text-sm [&>span]:text-white [&>span]:shadow-sm">
 										<?php echo wp_kses_post($link); ?>

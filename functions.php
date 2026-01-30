@@ -13,6 +13,14 @@ if (! defined('_S_VERSION')) {
 	define('_S_VERSION', '1.0.0');
 }
 
+if (! defined('BB_HOME_POSTS_PER_PAGE')) {
+	define('BB_HOME_POSTS_PER_PAGE', 14);
+}
+
+if (! defined('BB_HOME_SLIDER_POSTS')) {
+	define('BB_HOME_SLIDER_POSTS', 3);
+}
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -228,7 +236,8 @@ function bb_home_force_posts_per_page( $query ) {
 
 	$initial_posts_per_page = $query->get( 'posts_per_page' );
 	$target_posts_per_page  = defined( 'BB_HOME_POSTS_PER_PAGE' ) ? (int) BB_HOME_POSTS_PER_PAGE : 50;
-	$query->set( 'posts_per_page', $target_posts_per_page );
+	$slider_posts           = defined( 'BB_HOME_SLIDER_POSTS' ) ? (int) BB_HOME_SLIDER_POSTS : 3;
+	$query->set( 'posts_per_page', $target_posts_per_page + $slider_posts );
 
 	if ( defined( 'BB_HOME_DEBUG' ) && BB_HOME_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
 		$template = get_query_template( 'home' ) ?: get_query_template( 'index' );
