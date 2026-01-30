@@ -152,16 +152,26 @@ add_action('widgets_init', '_s_widgets_init');
  */
 function _s_scripts()
 {
-	wp_enqueue_style('_s-style', get_stylesheet_uri(), array(), _S_VERSION);
+	$stylesheet_path = get_stylesheet_directory() . '/style.css';
+	$stylesheet_ver  = file_exists( $stylesheet_path ) ? filemtime( $stylesheet_path ) : _S_VERSION;
+	wp_enqueue_style('_s-style', get_stylesheet_uri(), array(), $stylesheet_ver);
 	wp_style_add_data('_s-style', 'rtl', 'replace');
-	wp_enqueue_style('brendon-core-embed-style', get_template_directory_uri() . '/assets/css/embeds.css', array('_s-style'), _S_VERSION);
+	$embeds_css_path = get_template_directory() . '/assets/css/embeds.css';
+	$embeds_css_ver  = file_exists( $embeds_css_path ) ? filemtime( $embeds_css_path ) : _S_VERSION;
+	wp_enqueue_style('brendon-core-embed-style', get_template_directory_uri() . '/assets/css/embeds.css', array('_s-style'), $embeds_css_ver);
 	if ( is_page_template( 'page-live-now.php' ) ) {
-		wp_enqueue_style( 'brendon-core-live-now', get_template_directory_uri() . '/assets/css/live-now.css', array( '_s-style' ), _S_VERSION );
+		$live_now_css_path = get_template_directory() . '/assets/css/live-now.css';
+		$live_now_css_ver  = file_exists( $live_now_css_path ) ? filemtime( $live_now_css_path ) : _S_VERSION;
+		wp_enqueue_style( 'brendon-core-live-now', get_template_directory_uri() . '/assets/css/live-now.css', array( '_s-style' ), $live_now_css_ver );
 	}
 
-	wp_enqueue_script('_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+	$nav_js_path = get_template_directory() . '/js/navigation.js';
+	$nav_js_ver  = file_exists( $nav_js_path ) ? filemtime( $nav_js_path ) : _S_VERSION;
+	wp_enqueue_script('_s-navigation', get_template_directory_uri() . '/js/navigation.js', array(), $nav_js_ver, true);
 	if (is_singular()) {
-		wp_enqueue_script('brendon-core-embed-script', get_template_directory_uri() . '/assets/js/embeds.js', array(), _S_VERSION, true);
+		$embeds_js_path = get_template_directory() . '/assets/js/embeds.js';
+		$embeds_js_ver  = file_exists( $embeds_js_path ) ? filemtime( $embeds_js_path ) : _S_VERSION;
+		wp_enqueue_script('brendon-core-embed-script', get_template_directory_uri() . '/assets/js/embeds.js', array(), $embeds_js_ver, true);
 	}
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {

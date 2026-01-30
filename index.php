@@ -82,15 +82,15 @@ get_header();
 							</div>
 						</div> -->
 
-						<div class="relative w-full" role="region" aria-label="<?php esc_attr_e('Featured posts slider', 'brendon-core'); ?>">
+							<div class="relative w-full" role="region" aria-label="<?php esc_attr_e('Featured posts slider', 'brendon-core'); ?>">
 								<div data-slider-track class="flex w-full flex-nowrap gap-4 overflow-x-auto pb-0 scroll-smooth snap-x snap-mandatory touch-pan-x scrollbar-hidden bg-transparent">
-								<?php foreach ($slider_posts as $post) : ?>
-									<?php setup_postdata($post); ?>
-									<?php $thumb_url = has_post_thumbnail($post) ? get_the_post_thumbnail_url($post, 'large') : ''; ?>
-									<article class="group relative flex-none w-full basis-full min-w-full snap-start rounded-3xl border border-[#F2A25C]/30 bg-white p-6 transition hover:-translate-y-1 dark:border-[#F2A25C]/20 dark:bg-slate-900 animate-featuredWave">
-										<span class="absolute top-5 right-5 z-20 rounded-full bg-[#F26D3D]/90 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
-											<?php esc_html_e('Featured', 'brendon-core'); ?>
-										</span>
+									<?php foreach ($slider_posts as $post) : ?>
+										<?php setup_postdata($post); ?>
+										<?php $thumb_url = has_post_thumbnail($post) ? get_the_post_thumbnail_url($post, 'large') : ''; ?>
+										<article class="group relative flex-none w-full basis-full min-w-full snap-start rounded-3xl border border-[#F2A25C]/30 bg-white p-6 transition hover:-translate-y-1 dark:border-[#F2A25C]/20 dark:bg-slate-900 animate-featuredWave" style="flex: 0 0 100%; width: 100%; min-width: 100%;">
+											<span class="absolute top-5 right-5 z-20 rounded-full bg-[#F26D3D]/90 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+												<?php esc_html_e('Featured', 'brendon-core'); ?>
+											</span>
 										<?php if ($thumb_url) : ?>
 											<div class="mb-4 overflow-hidden rounded-2xl bg-slate-100 z-0">
 												<div class="h-96 w-full overflow-hidden">
