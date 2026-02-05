@@ -271,7 +271,8 @@ if (class_exists('WooCommerce')) {
 function brendon_core_register_sidebar_menu()
 {
 	register_nav_menus([
-		'sidebar' => esc_html__('Sidebar Menu', 'brendon-core'),
+		'sidebar'           => esc_html__('Sidebar Menu', 'brendon-core'),
+		'sidebar-secondary' => esc_html__('Sidebar Secondary Menu', 'brendon-core'),
 	]);
 }
 add_action('init', 'brendon_core_register_sidebar_menu');

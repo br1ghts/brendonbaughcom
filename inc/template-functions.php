@@ -58,6 +58,28 @@ function brendon_core_get_sidebar_menu_items() {
 }
 
 /**
+ * Retrieve a nav menu label assigned to a location.
+ *
+ * @param string $location Menu location key.
+ * @return string
+ */
+function brendon_core_get_menu_label_by_location( $location ) {
+	$locations = get_nav_menu_locations();
+
+	if ( empty( $locations[ $location ] ) ) {
+		return '';
+	}
+
+	$menu = wp_get_nav_menu_object( $locations[ $location ] );
+
+	if ( ! $menu || empty( $menu->name ) ) {
+		return '';
+	}
+
+	return $menu->name;
+}
+
+/**
  * Default sidebar social links and icon metadata.
  *
  * @return array
@@ -260,7 +282,7 @@ function brendon_core_sidebar_menu_base_classes( $is_active = false ) {
  * @return array
  */
 function brendon_core_sidebar_menu_item_classes( $classes, $item, $args, $depth ) {
-	if ( isset( $args->theme_location ) && 'sidebar' === $args->theme_location ) {
+	if ( isset( $args->theme_location ) && in_array( $args->theme_location, [ 'sidebar', 'sidebar-secondary' ], true ) ) {
 		$classes = array_filter( $classes, function ( $class ) {
 			return false === strpos( $class, 'menu-' );
 		} );
@@ -281,7 +303,7 @@ add_filter( 'nav_menu_css_class', 'brendon_core_sidebar_menu_item_classes', 20, 
  * @return array
  */
 function brendon_core_sidebar_menu_link_attributes( $atts, $item, $args, $depth ) {
-	if ( isset( $args->theme_location ) && 'sidebar' === $args->theme_location ) {
+	if ( isset( $args->theme_location ) && in_array( $args->theme_location, [ 'sidebar', 'sidebar-secondary' ], true ) ) {
 		$is_current = in_array( 'current-menu-item', (array) $item->classes, true )
 			|| in_array( 'current_page_parent', (array) $item->classes, true )
 			|| in_array( 'current_page_ancestor', (array) $item->classes, true );

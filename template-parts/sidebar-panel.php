@@ -72,6 +72,31 @@ $social_links = brendon_core_get_sidebar_social_links();
 		<?php endif; ?>
 	</nav>
 
+	<?php if ( has_nav_menu( 'sidebar-secondary' ) ) : ?>
+		<?php
+		$sidebar_secondary_label = brendon_core_get_menu_label_by_location( 'sidebar-secondary' );
+		if ( ! $sidebar_secondary_label ) {
+			$sidebar_secondary_label = esc_html__( 'More links', 'brendon-core' );
+		}
+		?>
+		<div class="space-y-2">
+			<p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
+				<?php echo esc_html( $sidebar_secondary_label ); ?>
+			</p>
+			<nav class="space-y-2" aria-label="<?php echo esc_attr_x( 'Sidebar secondary menu', 'aria label', 'brendon-core' ); ?>">
+				<?php
+				wp_nav_menu([
+					'theme_location' => 'sidebar-secondary',
+					'container' => false,
+					'menu_class' => 'space-y-2',
+					'depth' => 1,
+					'fallback_cb' => false,
+				]);
+				?>
+			</nav>
+		</div>
+	<?php endif; ?>
+
 	<form role="search" method="get" class="space-y-2" action="<?php echo esc_url(home_url('/')); ?>">
 	<label class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300" for="sidebar-search"><?php esc_html_e('Search posts', 'brendon-core'); ?></label>
 		<div class="flex">
